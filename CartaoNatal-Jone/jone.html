@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Natal 🎄</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(#0b1d3a, #1e3c72);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    /* Container com perspectiva */
+    .scene {
+        perspective: 1200px;
+    }
+
+    /* Card que gira */
+    .card {
+        width: 360px;
+        height: 480px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .card.flipped {
+        transform: rotate3d(1, 1, 0, 180deg);
+    }
+
+    /* Frente e verso */
+    .side {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
+
+    .front img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .back {
+        background: rgba(0,0,0,0.75);
+        padding: 25px;
+        box-sizing: border-box;
+        transform: rotate3d(1,1,0,180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 1.5;
+        font-size: 15px;
+    }
+
+    /* Neve */
+    .snow {
+        position: fixed;
+        top: -10px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.9;
+        animation: fall linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+    <div class="card" id="card">
+        <!-- Frente -->
+        <div class="side front">
+            <img src="lucario_noel.jpg" alt="Natal">
+        </div>
+
+        <!-- Verso -->
+        <div class="side back">
+            <div>
+                🎄 <strong>Feliz Natal Jone e família</strong> 🎄<br><br>
+                Que seu Natal seja repleto de alegria, paz e coisas boas, e que
+                tenhas um próspero Ano Novo.<br><br>
+                Que neste ano de 2026 você consiga cada vez mais conquistar seus
+                objetivos e realizações de vida.<br><br>
+                Você é um cara que merece, te aprecio muito. Obrigado por sempre
+                me ajudar, seja no serviço ou com uma simples conversa.<br><br>
+                <strong>Um forte abraço!</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Flip ao clicar
+    const card = document.getElementById('card');
+    card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+    });
+
+    // Criar neve
+    function createSnow() {
+        const snow = document.createElement('div');
+        snow.classList.add('snow');
+
+        const size = Math.random() * 4 + 2;
+        snow.style.width = size + 'px';
+        snow.style.height = size + 'px';
+        snow.style.left = Math.random() * window.innerWidth + 'px';
+        snow.style.animationDuration = Math.random() * 5 + 5 + 's';
+
+        document.body.appendChild(snow);
+
+        setTimeout(() => {
+            snow.remove();
+        }, 10000);
+    }
+
+    setInterval(createSnow, 100);
+</script>
+
+</body>
+</html>

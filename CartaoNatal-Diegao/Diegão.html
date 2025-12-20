@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cartão de Natal 🎄</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #0a2342, #020c1b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    color: white;
+}
+
+.card {
+    text-align: center;
+    z-index: 2;
+    padding: 20px;
+}
+
+.card img {
+    width: 280px;
+    max-width: 90%;
+    cursor: pointer;
+    transition: transform 1s ease;
+}
+
+.card img.spin {
+    transform: rotate(360deg);
+}
+
+.message {
+    margin-top: 20px;
+    max-width: 500px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1 {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.share-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #25d366;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.share-btn:hover {
+    background: #1da851;
+}
+
+/* NEVE */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <img src="gengar-noel.jpg" id="gengar" alt="Gengar Natalino">
+
+    <div class="message" id="message">
+        <h1>🎅 Ho ho ho, Papai Noel chegou!</h1>
+        <p>
+         Feliz natal Diegão, tudo de bom para você e para dona Rosa.  
+        Que vocês tenham um Natal e um próspero Ano Novo repleto de coisas boas,
+        muita saúde, paz e dinheiro no bolso.
+        Obrigado também por estar comigo quando eu mais precisei, por me ajudar,
+        seja me escutando, me dando conselhos, puxões de orelha, na faculdade
+        e até mesmo nos meus dias mais sombrios. Enfim, obrigado por se tornar meu irmão.  
+        A vida me concedeu um grande amigo quando eu menos esperava. Um forte abraço e com carinho de seu amigo que não vale o que come
+        como você fala haha!
+        <br><br>
+        <strong>🎄 Feliz Natal !!! 🎄</strong>
+        </p>
+
+        <button class="share-btn" onclick="shareCard()">📲 Compartilhar cartão</button>
+    </div>
+</div>
+
+<script>
+const gengar = document.getElementById("gengar");
+const message = document.getElementById("message");
+
+gengar.addEventListener("click", () => {
+    gengar.classList.add("spin");
+    message.classList.add("show");
+
+    setTimeout(() => {
+        gengar.classList.remove("spin");
+    }, 1000);
+});
+
+// NEVE
+function createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.className = "snowflake";
+    snowflake.innerHTML = "❄";
+    snowflake.style.left = Math.random() * window.innerWidth + "px";
+    snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    snowflake.style.opacity = Math.random();
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
+
+    document.body.appendChild(snowflake);
+
+    setTimeout(() => {
+        snowflake.remove();
+    }, 5000);
+}
+
+setInterval(createSnowflake, 200);
+
+// COMPARTILHAR
+function shareCard() {
+    const text = "🎄 Feliz Natal! Veja esse cartão especial 🎅";
+    const url = window.location.href;
+
+    if (navigator.share) {
+        navigator.share({
+            title: "Cartão de Natal",
+            text: text,
+            url: url
+        });
+    } else {
+        navigator.clipboard.writeText(url);
+        alert("Link copiado! Agora é só compartilhar 🎁");
+    }
+}
+</script>
+
+</body>
+</html>

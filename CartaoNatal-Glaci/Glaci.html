@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Natal 🎄</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(#0b1d33, #1e3c72);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    img {
+        width: 100%;
+        max-width: 450px;
+        cursor: pointer;
+        transition: transform 1.2s ease;
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+
+    img.girar {
+        transform: rotate(360deg) scale(1.05);
+    }
+
+    .mensagem {
+        margin-top: 20px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1.5s ease, transform 1.5s ease;
+        white-space: pre-line;
+    }
+
+    .mensagem.mostrar {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* NEVE */
+    .snow {
+        position: fixed;
+        top: -10px;
+        color: white;
+        user-select: none;
+        pointer-events: none;
+        animation: cair linear infinite;
+        z-index: 1;
+    }
+
+    @keyframes cair {
+        to {
+            transform: translateY(110vh);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img id="imagem" src="Tj-noel.jpg" alt="Feliz Natal">
+    
+    <div id="mensagem" class="mensagem">
+Ho ho ho, Papai Noel chegou!
+
+Feliz natal Glaci, tudo de bom hoje e sempre. Obrigado por cuidar de mim e estar sempre ao lado de seu neto, até nos dias mais sombrios.
+ Obrigado por dar forças para ele, mesmo sem a senhora saber, e incentivar ele a não cair e desistir de seus sonhos e até mesmo de viver.
+Feliz natal Glaci !!!
+    </div>
+</div>
+
+<script>
+    const imagem = document.getElementById("imagem");
+    const mensagem = document.getElementById("mensagem");
+
+    imagem.addEventListener("click", () => {
+        imagem.classList.toggle("girar");
+        mensagem.classList.add("mostrar");
+    });
+
+    // Criar neve
+    function criarNeve() {
+        const floco = document.createElement("div");
+        floco.className = "snow";
+        floco.innerHTML = "❄";
+        floco.style.left = Math.random() * window.innerWidth + "px";
+        floco.style.fontSize = (Math.random() * 10 + 10) + "px";
+        floco.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        floco.style.opacity = Math.random();
+        document.body.appendChild(floco);
+
+        setTimeout(() => {
+            floco.remove();
+        }, 10000);
+    }
+
+    setInterval(criarNeve, 200);
+</script>
+
+</body>
+</html>

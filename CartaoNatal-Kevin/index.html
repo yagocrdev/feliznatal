@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cartão de Natal 🎄</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #00111f, #003366);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.cartao {
+    position: relative;
+    width: 350px;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    text-align: center;
+    z-index: 2;
+}
+
+.cartao img {
+    width: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 1s ease;
+}
+
+.cartao img.girar {
+    transform: rotateY(360deg);
+}
+
+.mensagem {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 1.5s ease, max-height 1.5s ease;
+}
+
+.mensagem.mostrar {
+    opacity: 1;
+    max-height: 600px;
+}
+
+.mensagem h2 {
+    color: #ff4444;
+    margin-bottom: 10px;
+}
+
+/* NEVE */
+.neve {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floco {
+    position: absolute;
+    top: -10px;
+    color: white;
+    font-size: 10px;
+    animation: cair linear infinite;
+}
+
+@keyframes cair {
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="neve" id="neve"></div>
+
+<div class="cartao">
+    <img src="Charizard-noel.jpg" id="imagemNatal" alt="Cartão de Natal">
+
+    <div class="mensagem" id="mensagem">
+        <h2>Ho ho ho, Papai Noel chegou! 🎅</h2>
+        <p>
+        Feliz natal meu primo para você, para o pessoal aew e sua família, tudo bom hoje e sempre um próspero ano novo repleto de saúde, paz, dinheiro no bolso e na carteira haha.
+        <br><br>
+        Obrigado por ser essa pessoa maravilhosa que és, obrigado por me acompanhar e até mesmo não deixar eu desistir ou cair nos meus dias mais sombrios.
+        <br><br>
+        Enfim, agradeço você de coração por estar sempre ao meu lado, e não é de hoje… te amo bochonha ❤️
+        <br><br>
+        <strong>Feliz Natal!!! 🎄✨</strong>
+        </p>
+    </div>
+</div>
+
+<script>
+const imagem = document.getElementById("imagemNatal");
+const mensagem = document.getElementById("mensagem");
+
+imagem.addEventListener("click", () => {
+    imagem.classList.add("girar");
+    mensagem.classList.add("mostrar");
+
+    setTimeout(() => {
+        imagem.classList.remove("girar");
+    }, 1000);
+});
+
+// NEVE
+const neve = document.getElementById("neve");
+
+function criarFloco() {
+    const floco = document.createElement("div");
+    floco.classList.add("floco");
+    floco.innerHTML = "❄";
+
+    floco.style.left = Math.random() * window.innerWidth + "px";
+    floco.style.animationDuration = (3 + Math.random() * 5) + "s";
+    floco.style.opacity = Math.random();
+    floco.style.fontSize = (10 + Math.random() * 10) + "px";
+
+    neve.appendChild(floco);
+
+    setTimeout(() => {
+        floco.remove();
+    }, 8000);
+}
+
+setInterval(criarFloco, 200);
+</script>
+
+</body>
+</html>

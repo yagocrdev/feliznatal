@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cartão de Natal</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: #0b6623;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* CARTÃO */
+.card {
+    width: 380px;
+    height: 520px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* IMAGEM */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* MENSAGEM */
+.message {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    color: #0b6623;
+    padding: 20px;
+    overflow-y: auto;
+    display: none;
+}
+
+.message h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.message p {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* NEVE */
+.snow {
+    position: fixed;
+    top: -10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <img src="Sonic-noel.jpg" id="img">
+
+    <div class="message" id="msg">
+        <h2>🎅 Ho Ho How Feliz Natal!!</h2>
+
+        <p>
+        Aqui é o noel o bom e velho velhinho ho ho how, venho aqui deixar
+        uma mensagem de Yago neste cartão de natal feito com muito carinho. Vamos la palavras de Yago:
+        <br><br>
+         Obrigado por serem esta família maravilhosa e tão linda um ótimo natal a todos repleto de alegria, paz e saúde hoje e sempre.
+        Que o ano novo venha com conquistas, objetivos alcançados e muitos
+        momentos felizes. Amo todos vocês! Obrigado por sempre serem meu ponto seguro em meio de tanto caos e ate mesmo nas minhas batalhas internas.
+        Que possamos continuar juntos enfrentando tudo isso que a vida nos traz.
+         Afinal agradeço todos os dias por esta longas jornadas ao lado de vocês, que me fazem ser uma pessoa melhor a cada dia.
+        Vocês me ajudam ate mesmo sem saberem, seja eu vendo ou acompanhando de longe por falha minha os meninos vendo a evolução dos meninos ou de vocês.
+         Ate mesmo uma foto vendo alegria e o sorriso cativante de todos isso me da forças nos meus dias mais escuros e cheio de caos.
+   Obrigado novamente por tudo e desculpa meu presente de natal n ser 
+  grandes coisas mas é feito com dedicação e carinho, afinal tive que estudar uns paranauês para poder compartilhar haha amo vocês!!
+        Mensagem de Yago para Mateus e família.<br>
+        How How Feliz Natal!!
+        </strong></p>
+    </div>
+</div>
+
+<script>
+const card = document.getElementById("card");
+const img = document.getElementById("img");
+const msg = document.getElementById("msg");
+
+card.addEventListener("click", () => {
+    if (msg.style.display === "block") {
+        msg.style.display = "none";
+        img.style.display = "block";
+    } else {
+        img.style.display = "none";
+        msg.style.display = "block";
+    }
+});
+
+/* NEVE */
+function criarNeve() {
+    const floco = document.createElement("div");
+    floco.classList.add("snow");
+
+    const size = Math.random() * 5 + 3;
+    floco.style.width = size + "px";
+    floco.style.height = size + "px";
+    floco.style.left = Math.random() * window.innerWidth + "px";
+    floco.style.animationDuration = Math.random() * 5 + 5 + "s";
+
+    document.body.appendChild(floco);
+    setTimeout(() => floco.remove(), 10000);
+}
+
+setInterval(criarNeve, 150);
+</script>
+
+</body>
+</html>

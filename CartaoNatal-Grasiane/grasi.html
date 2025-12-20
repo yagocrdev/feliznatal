@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cartão de Natal 🎄</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Georgia", serif;
+    background: linear-gradient(#0b1d2a, #1c3b57);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CONTÊINER DO CARTÃO */
+.card-container {
+    perspective: 1200px;
+}
+
+/* CARTÃO */
+.card {
+    width: 360px;
+    height: 520px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1.2s;
+    cursor: pointer;
+}
+
+/* FLIP */
+.card.flipped {
+    transform: rotateX(180deg);
+}
+
+/* FACES */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+
+/* FRENTE */
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* VERSO */
+.card-back {
+    background: #f9f5ef;
+    transform: rotateX(180deg);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.card-back h2 {
+    text-align: center;
+    color: #b22222;
+}
+
+.card-back p {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+    color: #333;
+}
+
+/* NEVE */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card-container">
+    <div class="card" id="card">
+        
+        <!-- FRENTE -->
+        <div class="card-face card-front">
+            <img src="cartao.jpg" alt="Cartão de Natal">
+        </div>
+
+        <!-- VERSO -->
+        <div class="card-face card-back">
+            <h2>🎅 Ho Ho Ho 🎄</h2>
+            <p>
+Aqui é o Noel, o bom e velho velhinho ho ho ho, venho aqui deixar uma mensagem de Yago neste cartão de Natal feito com muito carinho.
+<br><br>
+Vamos lá, palavras de Yago:
+<br><br>
+Feliz Natal tia, tio e primos! Que neste Natal vocês tenham muita alegria, saúde, paz, presentes haha — bom, chega de enrolar.
+
+ Obrigado por vocês estarem sempre comigo, me apoiando e me ajudando, seja na vida ou nos perrengues da casa haha.
+Agradeço todos os dias por termos criado vínculos de novo, não da forma que gostaríamos, mas às vezes acho que foi necessário.
+ Neste Natal, este é meu presente: um cartão, porém além de virtual, feito por mim com dedicação e carinho. Afinal, isso que estou fazendo é com base nos meus estudos e no incentivo de vocês também, por não deixarem eu desistir quando tudo desmoronou.
+Como sempre digo, a intenção é o que vale. Não tenho muitas palavras e nem sei muito bem o que dizer, mas saibam que estou sempre aqui com vocês e por vocês.
+Amo vocês. Obrigado por serem um porto seguro para mim em meio a tanto caos e sombras. Continuem sendo essa família maravilhosa que vocês são.
+
+Esta foi a mensagem e o recado que Yago deixou para Grasiane e família, com muito carinho e de coração.
+Agora estou indo embora, afinal tenho mais casas para deixar presentes!
+<br><br>
+<b>Ho Ho Ho! Feliz Natal!! 🎄🎁</b>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// FLIP
+const card = document.getElementById("card");
+card.addEventListener("click", () => {
+    card.classList.toggle("flipped");
+});
+
+// NEVE
+function createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.classList.add("snowflake");
+    snowflake.innerHTML = "❄";
+    snowflake.style.left = Math.random() * window.innerWidth + "px";
+    snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
+    document.body.appendChild(snowflake);
+
+    setTimeout(() => {
+        snowflake.remove();
+    }, 5000);
+}
+
+setInterval(createSnowflake, 150);
+</script>
+
+</body>
+</html>

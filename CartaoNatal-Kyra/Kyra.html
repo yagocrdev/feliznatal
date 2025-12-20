@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feliz Natal Kyra</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #b30000, #ff4d4d);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    /* Neve */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1em;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    .card {
+      background: #fff;
+      color: #333;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 420px;
+      width: 90%;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #b30000;
+    }
+
+    /* Presente */
+    .gift-container {
+      margin: 20px 0;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .gift {
+      transition: transform 1s ease;
+      transform-style: preserve-3d;
+    }
+
+    .gift.open {
+      transform: rotateY(180deg) scale(0.9);
+    }
+
+    .gift img {
+      width: 100%;
+      border-radius: 12px;
+      backface-visibility: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 16px;
+      color: #333;
+      line-height: 1.5;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      margin-top: 15px;
+      font-size: 0.85em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🎄 Clique no presente 🎁</h1>
+
+    <div class="gift-container" onclick="openGift()">
+      <div class="gift" id="gift">
+        <img src="stitch-papai-noel.jpg" alt="Presente de Natal" />
+      </div>
+    </div>
+
+    <div class="message" id="message">
+      <p><strong>Ho ho ho!</strong> Papai Noel chegou!</p>
+      <p>Feliz Natal Kyra, tudo de bom, muita saúde, paz e alegria. Continue sendo esta criança maravilhosa que tu é.</p>
+      <p>Lembre-se: continue obedecendo sua vovó e seu maninho. Seu irmão ficou muito contente com seu boletim e com sua dedicação na bicicleta, na leitura e nos estudos, mas disse que pode melhorar.</p>
+      <p>Ele fala para você estudar para o seu bem, então comece a obedecer e escutar ele também. Ele te ama demais.</p>
+      <p>Neste ano novo, procure estudar mais, ler mais e se dedicar mais. E não esqueça: tome água, é importante.</p>
+      <p><strong>Feliz Natal, Kyra!!! 🎅🎄</strong></p>
+    </div>
+
+    <footer>Com carinho ❤️</footer>
+  </div>
+
+  <script>
+    function openGift() {
+      const gift = document.getElementById('gift');
+      const msg = document.getElementById('message');
+
+      if (!gift.classList.contains('open')) {
+        gift.classList.add('open');
+        setTimeout(() => {
+          msg.style.display = 'block';
+          msg.scrollIntoView({ behavior: 'smooth' });
+        }, 900);
+      }
+    }
+
+    // Criar neve
+    const snowflakes = 40;
+    for (let i = 0; i < snowflakes; i++) {
+      const snow = document.createElement('div');
+      snow.className = 'snowflake';
+      snow.innerHTML = '❄';
+      snow.style.left = Math.random() * 100 + 'vw';
+      snow.style.animationDuration = 3 + Math.random() * 5 + 's';
+      snow.style.opacity = Math.random();
+      snow.style.fontSize = 10 + Math.random() * 20 + 'px';
+      document.body.appendChild(snow);
+    }
+  </script>
+</body>
+</html>
